@@ -1,0 +1,61 @@
+﻿@model KAM.Models.Equipamento
+
+@{
+    ViewData["Title"] = "Novo";
+    string data = DateTime.Now.Date.ToShortDateString();
+}
+
+<h1 class="text-primary">Novo Cadastro</h1>
+
+<h5>Preencha os campos abaixo e clique no botão <b>Salvar</b> para adicionar um novo equipamento</h5>
+<hr />
+<div class="row" style="font-family: Franklin Gothic;">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Empresa" class="control-label"></label>
+                <input asp-for="Empresa" class="form-control" oninput="upperCase(this)"/>
+                <span asp-validation-for="Empresa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Equipamento1" class="control-label"></label>
+                <input asp-for="Equipamento1" class="form-control" oninput="upperCase(this)"/>
+                <span asp-validation-for="Equipamento1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sn" class="control-label"></label>
+                <input asp-for="Sn" class="form-control" oninput="upperCase(this)"/>
+                <span asp-validation-for="Sn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nf" class="control-label"></label>
+                <input asp-for="Nf" class="form-control"/>
+                <span asp-validation-for="Nf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Data" class="control-label"></label>
+                <input asp-for="Data" class="form-control" value="@data" />
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar ao Início</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function upperCase(txt) {
+            txt.value = txt.value.toUpperCase();
+        }
+    </script>
+
+}

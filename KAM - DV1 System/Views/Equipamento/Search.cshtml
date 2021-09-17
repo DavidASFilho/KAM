@@ -1,0 +1,103 @@
+﻿@model KAM.Models.ListaEquipamento
+
+@{
+    ViewData["Title"] = "Pesquisa";
+    var year = DateTime.Now.Year;
+
+    if (ViewBag.Ano == year.ToString() || String.IsNullOrEmpty(ViewBag.Ano))
+    {
+        ViewBag.Ano = year;
+    }
+}
+
+<h1 class="text-info">Pesquisa</h1>
+<h5>
+    Para realizar uma pesquisa preencha os campos <b>Filtro</b> e <b>Texto</b>.
+    Se preferir, altere o campo <b>Ano</b>. O resultado será exibido na tabela abaixo
+</h5>
+<div class="alert alert-info" role="alert" style="font-family: Franklin Gothic;">
+    Para buscar todos os resultados, selecione <b>Todos</b> no campo <b>Filtro</b>
+    e deixe o campo <b>Texto</b> em branco
+</div>
+<hr />
+<form asp-action="Search" style="font-family: Franklin Gothic;" method="get">
+    <div class="form-row">
+        <div class="form-group col-sm-2">
+            <label>Filtro</label>
+            <select class="form-control" asp-for="Campo" asp-items="Model.ListItem">
+                <option value="">Todos</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-8">
+            <label>Texto</label>
+            <input class="form-control" type="text" name="pesq" value="@ViewBag.Pesq" />
+        </div>
+        <div class="form-group col-sm-1">
+            <label>Ano</label>
+            <input class="form-control" type="text" name="ano" value="@ViewBag.Ano" />
+        </div>
+    </div>
+    <div class="form-group form-row">
+        <input type="submit" class="btn btn-info" value="Pesquisar" />
+    </div>
+    <div>
+        <a asp-controller="Equipamento" asp-action="Index">Voltar ao Início</a>
+    </div>
+</form>
+<div style="font-family: Franklin Gothic;">
+    <table class="table table-striped table-hover">
+        <thead class="text-white bg-info">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Equipamento[0].Os)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Equipamento[0].Data)
+                </th>
+                <th class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Equipamento[0].Empresa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Equipamento[0].Nf)
+                </th>
+                <th class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Equipamento[0].Equipamento1)
+                </th>
+                <th class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Equipamento[0].Sn)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Equipamento)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Os)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Empresa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nf)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Equipamento1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sn)
+                    </td>
+                    <td>
+                        <div>
+                            <a class="text-info" asp-action="Edit" asp-route-id="@item.Os">Editar</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

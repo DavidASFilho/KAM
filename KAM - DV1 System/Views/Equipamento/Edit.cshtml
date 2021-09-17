@@ -1,0 +1,59 @@
+﻿@model KAM.Models.Equipamento
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1 class="text-warning">Edição</h1>
+
+<h5>Alterando Ordem de Serviço: <span class="text-danger">@Html.DisplayFor(model => model.Os)</span> </h5>
+<hr />
+<div class="row" style="font-family: Franklin Gothic;">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Os" />
+            <div class="form-group">
+                <label asp-for="Empresa" class="control-label"></label>
+                <input asp-for="Empresa" class="form-control" oninput="upperCase(this)" />
+                <span asp-validation-for="Empresa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Equipamento1" class="control-label"></label>
+                <input asp-for="Equipamento1" class="form-control" oninput="upperCase(this)" />
+                <span asp-validation-for="Equipamento1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sn" class="control-label"></label>
+                <input asp-for="Sn" class="form-control" oninput="upperCase(this)" />
+                <span asp-validation-for="Sn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nf" class="control-label"></label>
+                <input asp-for="Nf" class="form-control" />
+                <span asp-validation-for="Nf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Data" class="control-label"></label>
+                <input asp-for="Data" class="form-control" />
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input id="btEditar" type="submit" value="Editar" class="btn btn-warning" data-toggle="modal" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Search">Voltar para pesquisa</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function upperCase(txt) {
+            txt.value = txt.value.toUpperCase();
+        }
+    </script>
+}
